@@ -12,5 +12,10 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mongoose": "^6.3.5"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0",
+    "mongodb-memory-server": "^8.6.0",
+    "supertest": "^6.2.3"
   }
 }
