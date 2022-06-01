@@ -12,6 +12,15 @@ const trendRoutes = require('./routes/trends');
 // App setting
 app.use(express.json());
 
+// App CORS setting
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next();
+});
+
 // Connect to MongoDB
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/trends';
 
