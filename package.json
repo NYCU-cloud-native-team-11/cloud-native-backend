@@ -1,0 +1,11 @@
+{
+  "name": "nycu-group11-final-backend",
+  "version": "1.0.0",
+  "description": "nycu final project backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "author": "nycu-group11",
+  "license": "ISC"
+}
