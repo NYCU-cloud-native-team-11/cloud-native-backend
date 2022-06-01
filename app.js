@@ -20,17 +20,18 @@ const opts = {
     useUnifiedTopology: true,
 };
 
-mongoose.connect(dbUrl, opts, err => {
-    if (err) {
-        console.error(err);
-    }
-});
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-    console.log("Database connected");
-});
+if (process.env.NODE_ENV !== 'test') {
+    mongoose.connect(dbUrl, opts, err => {
+        if (err) {
+            console.error(err);
+        }
+    });
+    const db = mongoose.connection;
+    db.on("error", console.error.bind(console, "connection error:"));
+    db.once("open", () => {
+        console.log("Database connected");
+    });
+}
 
 
 // Routes
