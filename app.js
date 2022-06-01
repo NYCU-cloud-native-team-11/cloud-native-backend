@@ -7,6 +7,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
+const trendRoutes = require('./routes/trends');
+
 // App setting
 app.use(express.json());
 
@@ -32,6 +34,8 @@ db.once("open", () => {
 
 
 // Routes
+
+app.use('/api/trends', trendRoutes)
 
 app.all('*', (req, res, next) => {
     res.sendStatus(404);
