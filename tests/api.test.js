@@ -18,3 +18,12 @@ describe('GET /notfound', () => {
             .expect(404);
     });
 });
+
+// Test for GET /api/trends
+describe('GET /api/trends', () => {
+    test('should return 200 status', done => {
+        agent
+            .get('/api/trends')
+            .expect(200, done);
+    });
+});
