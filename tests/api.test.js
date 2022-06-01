@@ -27,3 +27,14 @@ describe('GET /api/trends', () => {
             .expect(200, done);
     });
 });
+
+
+// Test for GET /api/trends/keywords/<company>
+describe('GET /api/trends/keywords/<company>', () => {
+    const company = 'TSMC';
+    test('should return 200 status', done => {
+        agent
+            .get('/api/trends/keywords/' + company)
+            .expect(200, done);
+    });
+});
