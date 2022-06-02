@@ -17,3 +17,15 @@ module.exports.post = async (req, res) => {
     await trend.save();
     res.sendStatus(200);
 }
+
+module.exports.post_many = async (req, res) => {
+    const trends = req.body;
+    trend_list = []
+    for (const t of trends) {
+        const trend = new Trend(t);
+        trend_list.push(trend);
+
+    }
+    await Trend.insertMany(trend_list);
+    res.sendStatus(200);
+}
