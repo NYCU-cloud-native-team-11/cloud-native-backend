@@ -81,3 +81,35 @@ describe('POST /api/trends', () => {
             });
     });
 });
+
+
+describe('POST and GET', () => {
+    const payload = {
+        company: 'TSMC',
+        count: 10,
+        date: '2022-05-20',
+    };
+    test('should store a new trend and get payload data', (done) => {
+        agent
+            .post('/api/trends')
+            .send(payload)
+            .set('Accept', 'application/json')
+            .expect(200)
+            .end((err, res) => {
+                if (err) return done(err);
+            });
+        agent
+            .get('/api/trends')
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.length).toBe(1);
+                expect(res.body[0].company).toBe(payload.company);
+                expect(res.body[0].count).toBe(payload.count);
+                expect(Date(res.body[0].date)).toBe(Date(payload.date));
+            })
+            .end((err, res) => {
+                if (err) return done(err);
+                return done();
+            });
+    });
+});
