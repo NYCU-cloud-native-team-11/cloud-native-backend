@@ -22,4 +22,23 @@ router.post(
     trends.post
 );
 
+router.post(
+    '/post_many',
+    body().isArray(),
+    body('*.company').isString().isLength({ min: 1 }),
+    body('*.count').isInt({ min: 0 }),
+    body('*.date').isDate(),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        next();
+    },
+    trends.post_many
+);
+
+
+
+
 module.exports = router;
