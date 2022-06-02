@@ -113,3 +113,94 @@ describe('POST and GET', () => {
             });
     });
 });
+
+
+// Test for POST /api/trends/post_many
+describe('POST /api/trends/post_many', () => {
+    const payload = [
+        {
+            company: 'TSMC',
+            count: 15,
+            date: '2022-05-26',
+        },
+        {
+            company: 'ASML',
+            count: 5,
+            date: '2022-05-02',
+        },
+    ];
+    test('should store multiple new trend', (done) => {
+        agent
+            .post('/api/trends/post_many')
+            .send(payload)
+            .set('Accept', 'application/json')
+            .expect(200)
+            .end((err, res) => {
+                if (err) return done(err);
+                return done();
+            });
+    });
+    test('should return 400 status', (done) => {
+        agent
+            .post('/api/trends/post_many')
+            .send([
+                {
+                    company: 'TSMC',
+                    count: 15,
+                },
+                {
+                    company: 'ASML',
+                    count: 5,
+                    date: '2022-05-02',
+                },
+            ])
+            .set('Accept', 'application/json')
+            .expect(400)
+            .end((err, res) => {
+                if (err) return done(err);
+                return done();
+            });
+    });
+    test('should return 400 status', (done) => {
+        agent
+            .post('/api/trends/post_many')
+            .send([
+                {
+                    company: 'TSMC',
+                    count: 15,
+                    date: '2022-05-26',
+                },
+                {
+                    company: 'ASML',
+                    date: '2022-05-02',
+                },
+            ])
+            .set('Accept', 'application/json')
+            .expect(400)
+            .end((err, res) => {
+                if (err) return done(err);
+                return done();
+            });
+    });
+    test('should return 400 status', (done) => {
+        agent
+            .post('/api/trends/post_many')
+            .send([
+                {
+                    company: 15,
+                    count: 15,
+                    date: '2022-05-26',
+                },
+                {
+                    company: 'ASML',
+                    date: '2022-05-02',
+                },
+            ])
+            .set('Accept', 'application/json')
+            .expect(400)
+            .end((err, res) => {
+                if (err) return done(err);
+                return done();
+            });
+    });
+});
