@@ -13,6 +13,8 @@ router.get('/keywords/:company/last_7_days', trends.get_7_days);
 
 router.get('/keywords/:company/last_30_days', trends.get_30_days);
 
+router.get('/keywords/:company/:start_date-:end_date', trends.get_specify_date);
+
 
 router.post(
     '/',
