@@ -28,6 +28,24 @@ module.exports.get_24_hours = async (req, res) => {
     res.json(trends);
 }
 
+//  query 特定公司過去 7 天的趨勢 
+module.exports.get_7_days = async (req, res) => {
+    const now_date = (new Date(+new Date() + 8 * 3600 * 1000));
+    const last_date = (sub(now_date, {
+        days: 7,
+    }));
+    var trends = await Trend.find({
+        company: req.params.company,
+        date:
+        {
+            $lte: now_date,
+            $gte: last_date
+        }
+    })
+    res.json(trends);
+}
+
+
 module.exports.post = async (req, res) => {
     const trends = req.body;
     const { company, count, date } = req.body;

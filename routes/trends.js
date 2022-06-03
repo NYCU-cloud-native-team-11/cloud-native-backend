@@ -9,6 +9,8 @@ router.get('/keywords/:company', trends.get_params);
 
 router.get('/keywords/:company/last_24_hours', trends.get_24_hours);
 
+router.get('/keywords/:company/last_7_days', trends.get_7_days);
+
 router.post(
     '/',
     body('company').isString().isLength({ min: 1 }),
