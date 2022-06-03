@@ -58,6 +58,25 @@ describe('GET /api/trends/keywords/<company>/last_24_hours', () => {
     });
 });
 
+// Test for GET /api/trends/keywords/<company>/last_7_days
+describe('GET /api/trends/keywords/<company>/last_7_days', () => {
+    const company_TSMC = 'TSMC';
+    test('should return 200 status', done => {
+        agent
+            .get('/api/trends/keywords/' + company_TSMC + '/last_7_days')
+            .expect(200, done);
+    });
+    test("should return a empty array", done => {
+        agent
+            .get('/api/trends/keywords/' + company_TSMC + '/last_7_days')
+            .expect(200, [])
+            .end(function (err, res) {
+                if (err) return done(err);
+                return done();
+            });
+    });
+});
+
 
 // Test for POST /api/trends
 describe('POST /api/trends', () => {
