@@ -62,6 +62,29 @@ module.exports.get_30_days = async (req, res) => {
     res.json(trends);
 }
 
+function parse(str) {
+    if (!/^(\d){8}$/.test(str)) return "invalid date";
+    var y = str.substr(0, 4),
+        m = str.substr(4, 2),
+        d = str.substr(6, 2);
+    return new Date(+new Date(y, m - 1, d) + 8 * 3600 * 1000);
+}
+
+//  query 特定公司特定日期間的趨勢 
+module.exports.get_specify_date = async (req, res) => {
+    const start_date = parse(req.params.start_date);
+    const end_date = parse(req.params.end_date);
+    var trends = await Trend.find({
+        company: req.params.company,
+        date:
+        {
+            $lte: end_date,
+            $gte: start_date
+        }
+    })
+    res.json(trends);
+}
+
 
 
 module.exports.post = async (req, res) => {
