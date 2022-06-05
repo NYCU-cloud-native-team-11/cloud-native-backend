@@ -45,7 +45,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 // Routes
 
-app.use('/api/trends', trendRoutes)
+app.use('/', trendRoutes)
 
 app.all('*', (req, res, next) => {
     res.sendStatus(404);
