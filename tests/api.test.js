@@ -19,37 +19,37 @@ describe('GET /notfound', () => {
     });
 });
 
-// Test for GET /api/trends
-describe('GET /api/trends', () => {
+// Test for GET /
+describe('GET /', () => {
     test('should return 200 status', done => {
         agent
-            .get('/api/trends')
+            .get('/')
             .expect(200, done);
     });
 });
 
 
-// Test for GET /api/trends/keywords/<company>
-describe('GET /api/trends/keywords/<company>', () => {
+// Test for GET /keywords/<company>
+describe('GET /keywords/<company>', () => {
     const company = 'TSMC';
     test('should return 200 status', done => {
         agent
-            .get('/api/trends/keywords/' + company)
+            .get('/keywords/' + company)
             .expect(200, done);
     });
 });
 
-// Test for GET /api/trends/keywords/<company>/last_24_hours
-describe('GET /api/trends/keywords/<company>/last_24_hours', () => {
+// Test for GET /keywords/<company>/last_24_hours
+describe('GET /keywords/<company>/last_24_hours', () => {
     const company_TSMC = 'TSMC';
     test('should return 200 status', done => {
         agent
-            .get('/api/trends/keywords/' + company_TSMC + '/last_24_hours')
+            .get('/keywords/' + company_TSMC + '/last_24_hours')
             .expect(200, done);
     });
     test("should return a empty array", done => {
         agent
-            .get('/api/trends/keywords/' + company_TSMC + '/last_24_hours')
+            .get('/keywords/' + company_TSMC + '/last_24_hours')
             .expect(200, [])
             .end(function (err, res) {
                 if (err) return done(err);
@@ -58,17 +58,17 @@ describe('GET /api/trends/keywords/<company>/last_24_hours', () => {
     });
 });
 
-// Test for GET /api/trends/keywords/<company>/last_7_days
-describe('GET /api/trends/keywords/<company>/last_7_days', () => {
+// Test for GET /keywords/<company>/last_7_days
+describe('GET /keywords/<company>/last_7_days', () => {
     const company_TSMC = 'TSMC';
     test('should return 200 status', done => {
         agent
-            .get('/api/trends/keywords/' + company_TSMC + '/last_7_days')
+            .get('/keywords/' + company_TSMC + '/last_7_days')
             .expect(200, done);
     });
     test("should return a empty array", done => {
         agent
-            .get('/api/trends/keywords/' + company_TSMC + '/last_7_days')
+            .get('/keywords/' + company_TSMC + '/last_7_days')
             .expect(200, [])
             .end(function (err, res) {
                 if (err) return done(err);
@@ -77,17 +77,17 @@ describe('GET /api/trends/keywords/<company>/last_7_days', () => {
     });
 });
 
-// Test for GET /api/trends/keywords/<company>/last_30_days
-describe('GET /api/trends/keywords/<company>/last_30_days', () => {
+// Test for GET /keywords/<company>/last_30_days
+describe('GET /keywords/<company>/last_30_days', () => {
     const company_TSMC = 'TSMC';
     test('should return 200 status', done => {
         agent
-            .get('/api/trends/keywords/' + company_TSMC + '/last_30_days')
+            .get('/keywords/' + company_TSMC + '/last_30_days')
             .expect(200, done);
     });
     test("should return a empty array", done => {
         agent
-            .get('/api/trends/keywords/' + company_TSMC + '/last_30_days')
+            .get('/keywords/' + company_TSMC + '/last_30_days')
             .expect(200, [])
             .end(function (err, res) {
                 if (err) return done(err);
@@ -96,17 +96,17 @@ describe('GET /api/trends/keywords/<company>/last_30_days', () => {
     });
 });
 
-// Test for GET /api/trends/keywords/<company>/<specify date>-<specify date>
-describe('GET /api/trends/keywords/<company>/20220602-20220603', () => {
+// Test for GET /keywords/<company>/<specify date>-<specify date>
+describe('GET /keywords/<company>/20220602-20220603', () => {
     const company_TSMC = 'TSMC';
     test('should return 200 status', done => {
         agent
-            .get('/api/trends/keywords/' + company_TSMC + '/20220602-20220603')
+            .get('/keywords/' + company_TSMC + '/20220602-20220603')
             .expect(200, done);
     });
     test("should return a empty array", done => {
         agent
-            .get('/api/trends/keywords/' + company_TSMC + '/20220602-20220603')
+            .get('/keywords/' + company_TSMC + '/20220602-20220603')
             .expect(200, [])
             .end(function (err, res) {
                 if (err) return done(err);
@@ -116,8 +116,8 @@ describe('GET /api/trends/keywords/<company>/20220602-20220603', () => {
 });
 
 
-// Test for POST /api/trends
-describe('POST /api/trends', () => {
+// Test for POST /
+describe('POST /', () => {
     const payload = {
         company: 'TSMC',
         count: 10,
@@ -125,7 +125,7 @@ describe('POST /api/trends', () => {
     };
     test('should store a new trend', (done) => {
         agent
-            .post('/api/trends')
+            .post('/')
             .send(payload)
             .set('Accept', 'application/json')
             .expect(200)
@@ -136,7 +136,7 @@ describe('POST /api/trends', () => {
     });
     test('should return 400 status', (done) => {
         agent
-            .post('/api/trends')
+            .post('/')
             .send({ company: 'TSMC' })
             .set('Accept', 'application/json')
             .expect(400)
@@ -147,7 +147,7 @@ describe('POST /api/trends', () => {
     });
     test('should return 400 status', (done) => {
         agent
-            .post('/api/trends')
+            .post('/')
             .send({ company: 'TSMC', count: 10 })
             .set('Accept', 'application/json')
             .expect(400)
@@ -167,7 +167,7 @@ describe('POST and GET', () => {
     };
     test('should store a new trend and get payload data', (done) => {
         agent
-            .post('/api/trends')
+            .post('/')
             .send(payload)
             .set('Accept', 'application/json')
             .expect(200)
@@ -175,7 +175,7 @@ describe('POST and GET', () => {
                 if (err) return done(err);
             });
         agent
-            .get('/api/trends')
+            .get('/')
             .expect(200)
             .expect((res) => {
                 expect(res.body.length).toBe(1);
@@ -191,8 +191,8 @@ describe('POST and GET', () => {
 });
 
 
-// Test for POST /api/trends/post_many
-describe('POST /api/trends/post_many', () => {
+// Test for POST /post_many
+describe('POST /post_many', () => {
     const payload = [
         {
             company: 'TSMC',
@@ -207,7 +207,7 @@ describe('POST /api/trends/post_many', () => {
     ];
     test('should store multiple new trend', (done) => {
         agent
-            .post('/api/trends/post_many')
+            .post('/post_many')
             .send(payload)
             .set('Accept', 'application/json')
             .expect(200)
@@ -218,7 +218,7 @@ describe('POST /api/trends/post_many', () => {
     });
     test('should return 400 status', (done) => {
         agent
-            .post('/api/trends/post_many')
+            .post('/post_many')
             .send([
                 {
                     company: 'TSMC',
@@ -239,7 +239,7 @@ describe('POST /api/trends/post_many', () => {
     });
     test('should return 400 status', (done) => {
         agent
-            .post('/api/trends/post_many')
+            .post('/post_many')
             .send([
                 {
                     company: 'TSMC',
@@ -260,7 +260,7 @@ describe('POST /api/trends/post_many', () => {
     });
     test('should return 400 status', (done) => {
         agent
-            .post('/api/trends/post_many')
+            .post('/post_many')
             .send([
                 {
                     company: 15,
