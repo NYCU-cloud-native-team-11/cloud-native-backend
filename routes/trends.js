@@ -20,7 +20,7 @@ router.post(
     '/',
     body('company').isString().isLength({ min: 1 }),
     body('count').isInt({ min: 0 }),
-    body('date').isDate(),
+    body('date').isISO8601().toDate(),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -36,7 +36,7 @@ router.post(
     body().isArray(),
     body('*.company').isString().isLength({ min: 1 }),
     body('*.count').isInt({ min: 0 }),
-    body('*.date').isDate(),
+    body('*.date').isISO8601().toDate(),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

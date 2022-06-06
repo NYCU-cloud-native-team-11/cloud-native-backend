@@ -121,7 +121,7 @@ describe('POST /', () => {
     const payload = {
         company: 'TSMC',
         count: 10,
-        date: '2022-05-20',
+        date: '2022-05-20 00:00:00',
     };
     test('should store a new trend', (done) => {
         agent
@@ -163,7 +163,7 @@ describe('POST and GET', () => {
     const payload = {
         company: 'TSMC',
         count: 10,
-        date: '2022-05-20',
+        date: '2022-05-20 00:00:00',
     };
     test('should store a new trend and get payload data', (done) => {
         agent
@@ -197,12 +197,12 @@ describe('POST /post_many', () => {
         {
             company: 'TSMC',
             count: 15,
-            date: '2022-05-26',
+            date: '2022-05-26 00:00:00',
         },
         {
             company: 'ASML',
             count: 5,
-            date: '2022-05-02',
+            date: '2022-05-02 00:00:00',
         },
     ];
     test('should store multiple new trend', (done) => {
