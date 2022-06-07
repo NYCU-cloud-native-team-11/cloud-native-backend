@@ -13,7 +13,7 @@ module.exports.get_params = async (req, res) => {
 
 //  query 特定公司過去 24 小時的趨勢 
 module.exports.get_24_hours = async (req, res) => {
-    const now_date = (new Date(+new Date() + 8 * 3600 * 1000));
+    const now_date = (new Date(+new Date()));
     const last_date = (sub(now_date, {
         hours: 24,
     }));
@@ -30,7 +30,7 @@ module.exports.get_24_hours = async (req, res) => {
 
 //  query 特定公司過去 7 天的趨勢 
 module.exports.get_7_days = async (req, res) => {
-    const now_date = (new Date(+new Date() + 8 * 3600 * 1000));
+    const now_date = (new Date(+new Date()));
     const last_date = (sub(now_date, {
         days: 7,
     }));
@@ -47,7 +47,7 @@ module.exports.get_7_days = async (req, res) => {
 
 //  query 特定公司過去 30 天的趨勢 
 module.exports.get_30_days = async (req, res) => {
-    const now_date = (new Date(+new Date() + 8 * 3600 * 1000));
+    const now_date = (new Date(+new Date()));
     const last_date = (sub(now_date, {
         days: 30,
     }));
@@ -67,7 +67,7 @@ function parse(str) {
     var y = str.substr(0, 4),
         m = str.substr(4, 2),
         d = str.substr(6, 2);
-    return new Date(+new Date(y, m - 1, d) + 8 * 3600 * 1000);
+    return new Date(+new Date(y, m - 1, d));
 }
 
 //  query 特定公司特定日期間的趨勢 
